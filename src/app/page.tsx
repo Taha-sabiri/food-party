@@ -146,9 +146,9 @@ const FoodItem = ({ user, titel, date, id, onChanged }: Item) => {
         </div>
       </div>
 
-      <div className="flex justify-center items-center gap-4 pl-4">
+      {/* <div className="flex justify-center items-center gap-4 pl-4">
         <DeleteIcon className="text-red-600 cursor-pointer" onClick={deleteFood} />
-      </div>
+      </div> */}
     </div>
   );
 };
