@@ -30,12 +30,11 @@ export default function Home() {
     <div className="bg-background max-w-2xl w-full min-h-screen p-4 relative">
       <AddFoodDialog onAdded={getFood} />
 
-      <div className="w-full flex flex-col justify-center items-center h-[10svh] border-b border-black/10 mt-10">
+      <div className="w-full flex flex-col justify-center items-center h-[10svh] border-b border-black/10 mt-10 pb-4">
         <span className="text-black font-black text-2xl">فود پارتی 🍴</span>
         <span className="text-gray-600 mt-2 text-center ">
           یادآور دوستانه برای بچه‌های تیم تا هیچ کسی از لحظه‌ی شیرین امروز جا نمونه :)
         </span>
-        <div className="min-h-[2svh] w-full"></div>
       </div>
 
       <div className="mt-4 flex flex-col gap-2 h-[85svh] overflow-y-scroll no-scrollbar">
