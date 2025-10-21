@@ -1,5 +1,4 @@
-import { Delete, DeleteIcon, Edit, User } from "lucide-react";
-import Image from "next/image";
+import { DeleteIcon, Edit, User } from "lucide-react";
 
 export default function Home() {
   return (
