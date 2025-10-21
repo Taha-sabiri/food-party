@@ -22,7 +22,7 @@ export async function POST(request: Request) {
         .insert([
             {
                 title: body.title,
-                calories: body.calories,
+                user: body.user,
                 date: body.date,
             },
         ])
@@ -41,7 +41,7 @@ export async function PATCH(request: Request) {
         .from("food")
         .update({
             title: body.title,
-            calories: body.calories,
+            user: body.user,
             date: body.date,
         })
         .eq("id", body.id)
@@ -49,4 +49,24 @@ export async function PATCH(request: Request) {
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json({ message: "Food updated successfully", data });
+}
+
+export async function DELETE(req: Request) {
+  const body = await req.json();
+
+  if (!body.id)
+    return NextResponse.json(
+      { error: "شناسه (id) برای حذف الزامی است" },
+      { status: 400 }
+    );
+
+  const { error } = await supabaseServer
+    .from("food")
+    .delete()
+    .eq("id", body.id);
+
+  if (error)
+    return NextResponse.json({ error: error.message }, { status: 500 });
+
+  return NextResponse.json({ message: "غذا با موفقیت حذف شد 🗑️" });
 }

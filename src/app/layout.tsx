@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner"
 
 const rubik = Vazirmatn({
   variable: "--font-geist-sans",
@@ -24,7 +25,10 @@ export default function RootLayout({
       <body
         className={`${rubik.variable}  antialiased  w-screen h-screen flex justify-center items-center  `}
       >
+        <Toaster position="top-center" richColors />
         {children}
+
+
       </body>
     </html>
   );
