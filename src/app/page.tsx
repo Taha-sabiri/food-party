@@ -27,7 +27,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-background max-w-2xl w-full min-h-screen p-4 relative">
+    <div className="bg-white max-w-2xl w-full min-h-screen p-4 relative">
       <AddFoodDialog onAdded={getFood} />
 
       <div className="w-full flex flex-col justify-center items-center h-[10svh] border-b border-black/10 mt-10 pb-4">
