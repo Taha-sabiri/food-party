@@ -101,7 +101,7 @@ function AddFoodDialog({ onAdded }: { onAdded: () => void }) {
           <Input placeholder="نام کاربر" {...form.register("user")} />
           <Input placeholder="تاریخ (مثلاً 1404/02/01)" {...form.register("date")} />
 
-          <Button type="submit" disabled={loading}>
+          <Button type="submit" className="mt-5" disabled={loading}>
             {loading ? "در حال افزودن..." : "افزودن"}
           </Button>
         </form>
