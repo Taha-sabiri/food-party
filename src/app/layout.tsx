@@ -46,7 +46,7 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body
-        className={`${rubik.variable}  antialiased  w-screen h-screen flex justify-center items-center  `}
+        className={`${rubik.variable}  antialiased  w-screen h-screen flex justify-center items-start  `}
       >
         <Toaster position="top-center" richColors />
         {children}
