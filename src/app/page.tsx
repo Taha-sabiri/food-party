@@ -90,12 +90,12 @@ export default function Home() {
           loading ? <Skeleton className="min-h-[10svh]  w-full p-5 rounded-2xl mt-2" /> : <div className=" w-full min-h-[10svh] mt-2 relative">
             {diff == 0 ? (
               <div className="flex justify-between w-full items-center bg-amber-300 p-5 rounded-2xl my-2 shadow-amber-200 shadow-2xl">
-                <span className="text-xl text-white font-bold">امروز شیرینی داریممممم !!!</span>
+                <span className="text-xl text-white font-bold">امروز شیرینی داریممممم</span>
                 <img className="absolute left-5 shadow-2xl  rounded-full" src={emoj2.src} width={100} />
               </div>
             ) : (
-              <div className="flex justify-between w-full items-center bg-yellow-100 p-5 rounded-2xl my-2 shadow-amber-200 shadow-2xl">
-                <span className="text-xl text-white font-bold w-[50%]">{diff} روز مونده به {sortedFoods[0]?.title}</span>
+              <div className="flex justify-between w-full items-center bg-amber-300 p-5 rounded-2xl my-2 shadow-amber-200 shadow-2xl">
+                <span className="text-xl text-white font-bold w-[60%]">{diff} روز مونده به {sortedFoods[0]?.title}</span>
                 <img className="absolute left-5 shadow-2xl rounded-full " src={emoj.src} width={100} />
               </div>
             )}
