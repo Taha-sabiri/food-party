@@ -44,7 +44,8 @@ export default function Home() {
     getFood();
   }, []);
 
-  const faToEnNumber = (str: string) => {
+  const faToEnNumber = (str?: string) => {
+    if (!str) return "";
     const map: Record<string, string> = {
       "۰": "0",
       "۱": "1",
@@ -57,24 +58,37 @@ export default function Home() {
       "۸": "8",
       "۹": "9",
     };
-    return str?.replace(/[۰-۹]/g, (w) => map[w]);
+    return str.replace(/[۰-۹]/g, (w) => map[w]);
   };
 
-  const parseShamsiDate = (date: string) => {
-    return Number(faToEnNumber(date)?.replace(/\//g, ""));
+  const parseShamsiDate = (date?: string) => {
+    if (!date) return 0;
+    return Number(faToEnNumber(date).replace(/\//g, ""));
   };
+
+  function diffInDays(date1?: string, date2?: string): number {
+    if (!date1 || !date2) return 0;
+    const [y1, m1, d1] = date1.split("/").map(Number);
+    const [y2, m2, d2] = date2.split("/").map(Number);
+
+    const g1 = jalaali.toGregorian(y1, m1, d1);
+    const g2 = jalaali.toGregorian(y2, m2, d2);
+
+    const t1 = new Date(g1.gy, g1.gm - 1, g1.gd);
+    const t2 = new Date(g2.gy, g2.gm - 1, g2.gd);
+
+    const diffTime = t1.getTime() - t2.getTime();
+    return Math.round(diffTime / (1000 * 60 * 60 * 24));
+  }
 
   const sortedFoods = [...foods].sort(
     (a, b) => parseShamsiDate(a.date) - parseShamsiDate(b.date)
   );
 
-  const lastFoodNum = parseShamsiDate(sortedFoods[0]?.date);
-  const todayNum = Number(today.replace(/\//g, ""));
+  const lastFoodDate = faToEnNumber(sortedFoods[0]?.date || "");
+  const todayDate = faToEnNumber(today || "");
 
-  const diff = lastFoodNum - todayNum;
-
-  console.log(diff);
-
+  const diff = diffInDays(lastFoodDate, todayDate)
 
   return (
     <div className="bg-white max-w-2xl w-full min-h-screen p-4 relative">
