@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckUser, Food, FoodElement, User } from "@/types/types";
-import { DeleteIcon, Edit, HomeIcon, Plus, Settings, UserIcon } from "lucide-react";
+import { DeleteIcon, Edit, HomeIcon, Plus, Settings, UserCircle, UserIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -29,11 +29,22 @@ const now = new Date();
 export default function Home() {
   const [foods, setFoods] = useState<FoodElement[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [user, setUser] = useState<User>()
   const { jy, jm, jd } = jalaali.toJalaali(now);
   const today = `${jy}/${jm.toString().padStart(2, "0")}/${jd.toString().padStart(2, "0")}`;
   const router = useRouter();
   console.log(today);
 
+  const checkUser = async () => {
+    const response = await fetch("/api/auth/check");
+    const res: CheckUser = await response.json();
+    if (res.authenticated && res.user) {
+      setUser(res.user)
+    } else {
+      localStorage.clear()
+    }
+
+  };
 
   const getFood = async () => {
     const res = await fetch("/api/food");
@@ -45,6 +56,7 @@ export default function Home() {
 
   useEffect(() => {
     getFood();
+    checkUser()
   }, []);
 
   const faToEnNumber = (str?: string) => {
@@ -100,23 +112,20 @@ export default function Home() {
 
       <div className="w-full flex flex-col justify-center items-center min-h-[10svh] border-b border-black/10 mt-10 pb-4">
         <span className="text-black font-black text-2xl">فود پارتی 🍴</span>
-        <span className="text-gray-600 mt-2 text-center  ">
-          یادآور دوستانه برای بچه‌های تیم تا هیچ کسی از لحظه‌ی شیرین امروز جا نمونه :)
-        </span>
+
+        <span className=" text-black mt-2">به پنل ادمین خوش آمدید</span>
 
         {
           loading ? <Skeleton className="min-h-[10svh]  w-full p-5 rounded-2xl mt-2" /> : <div className=" w-full min-h-[10svh] mt-2 relative">
-            {diff == 0 ? (
-              <div className="flex justify-between w-full items-center bg-amber-300 p-5 rounded-2xl my-2 shadow-amber-200 shadow-2xl">
-                <span className="text-xl text-white font-bold">امروز شیرینی داریممممم</span>
-                <img className="absolute left-5 shadow-2xl  rounded-full" src={emoj2.src} width={100} />
+
+            <div className="flex justify-between w-full items-center bg-stone-600 p-4 rounded-2xl  ">
+              <div className="flex flex-col">
+                <span className="text-xl text-white font-bold">اطلاعات حساب:</span>
+                <span className=" text-white text-xs mt-1">{user?.email}</span>
               </div>
-            ) : (
-              <div className="flex justify-between w-full items-center bg-amber-300 p-5 rounded-2xl my-2 shadow-amber-200 shadow-2xl">
-                <span className="text-xl text-white font-bold w-[60%]">{diff} روز مونده به {sortedFoods[0]?.title}</span>
-                <img className="absolute left-5 shadow-2xl rounded-full " src={emoj.src} width={100} />
-              </div>
-            )}
+              <UserCircle className="absolute left-10 rounded-full text-white "  size={120} />
+            </div>
+
           </div>
         }
 
@@ -126,7 +135,7 @@ export default function Home() {
         {loading ? (
           <span className="text-center text-black/40 mt-20">لطفا شکیبا باشید ...</span>
         ) : (
-          sortedFoods.map((i) => <FoodItem key={i.id} user={i.user} date={i.date} titel={i.title} id={i.id} onChanged={getFood}  />)
+          sortedFoods.map((i) => <FoodItem key={i.id} user={i.user} date={i.date} titel={i.title} id={i.id} onChanged={getFood} hasUser={user ? true : false} />)
         )}
         <div className="min-h-[50svh] w-full"></div>
       </div>
@@ -224,11 +233,11 @@ interface Item {
   titel: string;
   id: number;
   date: string;
-
+  hasUser: boolean
   onChanged: () => void;
 }
 
-const FoodItem = ({ user, titel, date, id, onChanged }: Item) => {
+const FoodItem = ({ user, titel, date, id, onChanged, hasUser }: Item) => {
 
   const deleteFood = async () => {
     const res = await fetch(`/api/food`, {
@@ -255,7 +264,9 @@ const FoodItem = ({ user, titel, date, id, onChanged }: Item) => {
         </div>
       </div>
 
-    
+      {hasUser && <div className="flex justify-center items-center gap-4 pl-4">
+        <DeleteIcon className="text-red-500 cursor-pointer" onClick={deleteFood} />
+      </div>}
     </div>
   );
 };
