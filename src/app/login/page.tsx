@@ -49,7 +49,7 @@ export default function Splash() {
 
         if (res.ok) {
             toast.success("خوش آمدید")
-            router.replace('/dashboard/home')
+            router.replace('/dashboard/admin')
             setLoading(false)
         } else {
             toast.error("نام کاربری یا رمز عبور شما اشتباه است")

@@ -35,7 +35,7 @@ export default function Splash() {
             <div className="flex w-full flex-col gap-2 absolute bottom-10 p-4">
 
                 <Button className="bg-black text-yellow-400" onClick={() => {
-                    router.replace('/dashboard/admin')
+                    router.replace('/login')
                 }}>ورود با ادمین</Button>
                 <Button variant={"outline"} className="bg-transparent text-black border hover:bg-transparent" onClick={() => {
                     router.replace('/dashboard/home')

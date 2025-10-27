@@ -123,7 +123,7 @@ export default function Home() {
                 <span className="text-xl text-white font-bold">اطلاعات حساب:</span>
                 <span className=" text-white text-xs mt-1">{user?.email}</span>
               </div>
-              <UserCircle className="absolute left-10 rounded-full text-white "  size={120} />
+              <UserCircle className="absolute left-10 rounded-full text-white "  size={50} />
             </div>
 
           </div>
