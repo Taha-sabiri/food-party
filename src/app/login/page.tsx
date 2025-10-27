@@ -16,7 +16,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/comp
 import { toast } from "sonner";
 
 
-export default function Splash() {
+export default function Login() {
 
     const [loading, setLoading] = useState(false)
     

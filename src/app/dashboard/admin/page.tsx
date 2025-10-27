@@ -26,7 +26,7 @@ import { useRouter } from "next/navigation";
 const now = new Date();
 
 
-export default function Home() {
+export default function Admin() {
   const [foods, setFoods] = useState<FoodElement[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<User>()
