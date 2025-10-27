@@ -236,7 +236,7 @@ interface Item {
   titel: string;
   id: number;
   date: string;
-  hasUser: Boolean
+  hasUser: boolean
   onChanged: () => void;
 }
 
