@@ -99,7 +99,7 @@ export default function Login() {
                         <Button type="submit" className="mt-10 " >
                             {loading ? "شکیبا باشید ..." : "ورود"}
                         </Button>
-                        <Button variant={"outline"} className="" onClick={() => { router.replace('/dashboard/home') }}>
+                        <Button type="button" variant={"outline"} className="" onClick={() => { router.replace('/dashboard/home') }}>
                             ورود به عنوان مهمان
                         </Button>
                     </form>
